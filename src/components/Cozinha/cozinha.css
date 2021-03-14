@@ -1,0 +1,102 @@
+.container{
+    margin: 0 auto;
+    height: 100vh;
+    background-color: #FFF;
+    border: 2px solid #c4c4c4;
+    border-radius: 30px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    font-family: Roboto thin;
+    font-size: 0.7rem;
+    padding: 10px;
+}
+
+.fila-comandas{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    height: 100%;
+
+}
+
+.fila-comandas #father #title{
+    display: flex;
+}
+.fila-comandas #father div h1{ /* titulo */
+    
+    width: 90%;
+    height: 14%;
+    border-bottom: 2px solid #c4c4c4;
+}
+
+.cozinha-comandas{ /* section */
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    height: 100%;
+}
+
+.pagar-comandas{ /* section */
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    height: 100%;
+}
+
+#list-comanda{
+    font-family: Roboto;
+    font-size: 1rem;
+    height: auto; 
+}
+
+.simply-comanda{
+    margin: 10px;
+    border: none;
+    box-shadow: none;
+    display: inline-flex;
+    height: auto;
+    background-color: #FFF;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #CDCDCD;
+    text-align: center;
+}
+
+.simply-comanda:hover{
+    background-color: #c4c4c4;
+    cursor: pointer;
+}
+
+#title-side{
+    display: flex;
+    border-bottom: 2px solid #c4c4c4;
+}
+
+#title-rest{
+    display: flex;
+    border-bottom: 2px solid #c4c4c4; 
+}
+
+#icon-fila{
+    color: #FFA149;
+    margin: 0 10px;
+    transform: translateY(13px);
+}
+
+#icon-rest{
+    color: #3CCFB5;
+    margin: 0 10px;
+    transform: translateY(10px);
+}
+
+#icon-pagar{
+    color: #1E943F;
+    margin: 0 10px;
+    transform: translateY(12px);
+}

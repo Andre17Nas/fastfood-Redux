@@ -1,0 +1,154 @@
+body{
+    
+  background-color: #DCDCDC;
+}
+.container{
+    margin: 0 auto;
+    width: 60vw;
+    height: 90vh;
+    background-color: #FFF;
+    border: 2px solid #c4c4c4;
+    border-radius: 30px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+.new-comanda{  
+    display: block;
+    text-align: center;
+    justify-content: center;
+    font-family: Roboto thin;
+    border-right: 2px solid #c4c4c4;
+    
+}
+
+.icon-title{
+    transform: translateY(8px);
+}
+/* category*/
+form{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.list-container{
+    height: 50px;
+    width: 350px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 2px solid #c4c4c4;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.new-comanda h1{
+    font-family: Roboto thin;
+    font-weight: 300;
+    text-align: start;
+    margin-left: 30px;
+}
+
+/* lISTA */
+ul{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+ul li{
+    margin: 0;
+    list-style: none;
+    line-height: 20px;
+    font-family: Roboto;
+    margin-bottom: 10px;
+}
+
+
+ul li #add{
+    margin-top: 10px;
+    align-items: center;
+    color: green;
+    cursor: pointer; 
+    transform:translateY(8px);
+}
+
+/* ......*/
+
+.view-comanda{
+    margin-top: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+}
+
+ul{
+    margin:10px;
+    border-radius: 20px;
+    border: 1px solid #DCDCDC;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+input{
+    width: 300px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #c4c4c4;
+    text-align: center;
+    font-family: Roboto light;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+
+}
+
+ul li #rm{
+    color: #ff0000;
+    transform: translateY(8px);
+    cursor: pointer;
+}
+
+span{
+    font-weight: bold;
+}
+
+.price{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    line-height: 50px;
+    font-size: 2rem;
+    font-family: Roboto;
+}
+
+.price > span{   
+    margin: 0;
+    font-size: 1rem;
+}
+
+.btn-price{
+    width: 300px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Roboto light;
+    color: #FFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #3ED15E;
+    border: none;
+    
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-price:hover{
+    background-color: #c4c4c4;
+}
