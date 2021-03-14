@@ -17,10 +17,13 @@ body{
 }
 
 .new-comanda{  
+    margin-right: 15px;
+    width: 100%;
     display: block;
     text-align: center;
     justify-content: center;
     font-family: Roboto thin;
+    font-size: 1rem;
     border-right: 2px solid #c4c4c4;
     
 }
@@ -29,12 +32,7 @@ body{
     transform: translateY(8px);
 }
 /* category*/
-form{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 .list-container{
     height: 50px;
     width: 350px;
@@ -64,6 +62,8 @@ ul{
 }
 
 ul li{
+    text-align: justify;
+    justify-content: center;
     margin: 0;
     list-style: none;
     line-height: 20px;
@@ -83,11 +83,11 @@ ul li #add{
 /* ......*/
 
 .view-comanda{
-    margin-top: 0;
+    margin: 10px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    width: 400px;
+    width: 450px;
 }
 
 ul{

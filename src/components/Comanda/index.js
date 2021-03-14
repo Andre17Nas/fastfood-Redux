@@ -1,13 +1,31 @@
-import React from  'react'
+import React, { useState, useEffect} from  'react'
 import './comanda.css'
 import { MdFormatListBulleted, MdAddCircle, MdRemoveCircle, MdRestaurantMenu } from  'react-icons/md'
+import api from '../../services/api'
 
 export default function Comanda(){
+ 
+    const [food, setFood] = useState([]);
+    const [category, setCategory] = useState('burgers');
+
+    useEffect(()=>{
+
+        async function loadApi(){
+
+            const response = await api.get(category);
+            setFood(response.data);
+            console.log(response.data);
+
+        }
+
+        loadApi();
+
+    },[category])
+
     return(
         <div className="container">
             <div className="new-comanda">
-                <h1><MdFormatListBulleted size={40} className="icon-title"/>Nova Comanda</h1>
-                    <form>
+                <h1><MdFormatListBulleted size={40} className="icon-title"/>Nova Comanda</h1>          
                     <select className="list-container">
                             <option value="Mesa 01">Mesa 01</option>
                             <option value="Mesa 02">Mesa 02</option>
@@ -18,24 +36,21 @@ export default function Comanda(){
                             <option value="Mesa 07">Mesa 07</option>
                             <option value="Mesa 08">Mesa 08</option>
                             <option value="Mesa 09">Mesa 09</option>
-                    </select>
-
-                    <select className="list-container">
-                            <option value="Hamburgers de Carne">Hamburgers de Carne</option>
-                            <option value="Hamburgers de Frango">Hamburgers de Frango</option>
-                            <option value="Saladas/Vegan">Saladas/Vegan</option>
-                            <option value="Bebidas">Bebidas</option>
-                            <option value="Acompanhamento">Acompanhamento</option>
-                    </select>
-                    </form>
-
+                        </select>
+                    <select className="list-container" id="select" onChange={
+                        ()=>{setCategory(document.getElementById("select").value)}}>
+                            <option value="burgers">Hamburguers de Carne</option>
+                            <option value="burgers_chicken">Hamburgers de Frango</option>
+                            <option value="vegan">Saladas/Vegan</option>
+                            <option value="drinks">Bebidas</option>
+                            <option value="side_dish">Acompanhamento</option>                   
+                            <option value="dessert">Sobremessa</option>
+                    </select> 
+                {food.map( foods =>(       
                 <ul>
-                    <li>Duplo Cheedar<span> R$</span>29,00 <MdAddCircle size={28} id="add"/></li>
-                    <li>Duplo Cheedar<span> R$</span>29,00 <MdAddCircle size={28} id="add"/></li>
-                    <li>Duplo Cheedar<span> R$</span>29,00 <MdAddCircle size={28} id="add"/></li>
-                    <li>Duplo Cheedar<span> R$</span>29,00 <MdAddCircle size={28} id="add"/></li>
-                    <li>Duplo Cheedar<span> R$</span>29,00 <MdAddCircle size={28} id="add"/></li>
+                    <li id={foods.id}>{foods.name}<span> R$</span>{foods.price}<MdAddCircle size={28} id="add"/></li>
                 </ul>
+                ))}              
             </div>
             <div className="view-comanda">
                 <MdRestaurantMenu size={100}/>
