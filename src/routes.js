@@ -1,15 +1,15 @@
 import React from 'react' 
 import { Route, BrowserRouter, Switch} from 'react-router-dom'
-import Comanda from './components/Comanda'
-import Cozinha from './components/Cozinha'
+import Comanda from './components/pages/Comanda'
+import Cozinha from './components/pages/Cozinha'
 
 export default function Routes(){
     return(
-        <BrowserRouter>
+        <>
             <Switch>
-                <Route exact path="/" component={Comanda}/>
-                <Route exact path="/cozinha" component={Cozinha}/>
+                <Route exact path="/" exact component={Comanda}/>
+                <Route exact path="/cozinha" exact component={Cozinha}/>
             </Switch>
-        </BrowserRouter>
+        </>
     );
 }

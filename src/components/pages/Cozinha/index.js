@@ -5,15 +5,24 @@ import '../Cozinha/cozinha.css'
 
 export default function Cozinha(){
 
+    const itens_da_comanda = useSelector(state => state.reducer);
+    console.log(itens_da_comanda)
+
     return(
         <div className="container">
+        <div id="back-to-home"> Adicionar uma Nova Comanda </div>
             <div className="fila-comandas">
                 <div id="father">
                 <div id="title"><MdRestaurantMenu size={30} id="icon-fila"/><h1>Fila de Comandas</h1></div>               
                         <div id="list-comanda">
-                            <div className="simply-comanda">
-                                MESA 01
-                            </div> 
+                            
+                                {(itens_da_comanda.map(i => {
+                                    <div className="simply-comanda" key={i.id}> 
+                                    {i.name}
+                                    </div> 
+                                }))
+                                }
+                            
 
                             <div className="simply-comanda">
                                 MESA 03
