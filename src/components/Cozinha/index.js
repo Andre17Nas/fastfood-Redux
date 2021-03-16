@@ -1,8 +1,10 @@
 import React from  'react'
+import { useSelector } from 'react-redux'
 import { MdRestaurantMenu, MdAttachMoney} from 'react-icons/md'
 import '../Cozinha/cozinha.css'
 
 export default function Cozinha(){
+
     return(
         <div className="container">
             <div className="fila-comandas">

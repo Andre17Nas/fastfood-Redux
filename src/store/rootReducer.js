@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
-import comanda from './modules/comandas/reducer'
+import reducer from './modules/comandas/reducer'
 
 export default combineReducers({
-    comanda,
+    reducer,
 })
 

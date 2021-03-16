@@ -1,20 +1,41 @@
 import React, { useState, useEffect} from  'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './comanda.css'
 import { MdFormatListBulleted, MdAddCircle, MdRemoveCircle, MdRestaurantMenu } from  'react-icons/md'
 import api from '../../services/api'
 
 export default function Comanda(){
- 
-    const [food, setFood] = useState([]);
-    const [category, setCategory] = useState('burgers');
+
+    
+    const itens = useSelector(state => state.reducer);
+    console.log(itens)
+    /* 
+    
+    # state para comanda 
+    
+    - Nome do cliente v
+    - Mesa v
+    - pedidos v
+    - Preço  
+    
+    */
+   // const [comanda, setComanda] = useState([]); /* dados da comanda */
+   // const [cliente, setCliente] = useState(''); /* nome do cliente */
+    const [mesa, setMesa] = useState(''); /* nome da mesa */
+  //  const [itempedido, setItempedido] = useState([]); /* armazena os items */
+  //  const [price, setPrice] = useState(0.00); /* total da comanda */
+
+    const [category, setCategory] = useState('burgers'); /* categora usado para escolher os pratos*/
+    const [pedido, setPedido] = useState([]); /* recebe os dados da api*/
+    const dispatch = useDispatch();
 
     useEffect(()=>{
 
         async function loadApi(){
 
             const response = await api.get(category);
-            setFood(response.data);
-            console.log(response.data);
+            setPedido(response.data);
 
         }
 
@@ -22,11 +43,29 @@ export default function Comanda(){
 
     },[category])
 
+    function registrar_Comanda(nova_comanda){
+        //setCliente(document.getElementById('name_client').value)
+        //setComanda(...comanda, cliente, mesa)
+        dispatch({
+            type: "FILA_COMANDAS", /* envia para o Reducer */
+            /* preciso enviar a comanda com todos os dados */
+            nova_comanda 
+        })
+       // console.log(comanda)
+    }
+
+    function adicionar_item_comanda(item){
+        dispatch({
+            type: "ADD_ITEM_COMANDA",
+            item
+        })
+    }
+
     return(
         <div className="container">
             <div className="new-comanda">
                 <h1><MdFormatListBulleted size={40} className="icon-title"/>Nova Comanda</h1>          
-                    <select className="list-container">
+                    <select className="list-container" id="num_mesa" onChange={()=>setMesa(document.getElementById('num_mesa').value)}>
                             <option value="Mesa 01">Mesa 01</option>
                             <option value="Mesa 02">Mesa 02</option>
                             <option value="Mesa 03">Mesa 03</option>
@@ -46,25 +85,29 @@ export default function Comanda(){
                             <option value="side_dish">Acompanhamento</option>                   
                             <option value="dessert">Sobremessa</option>
                     </select> 
-                {food.map( foods =>(       
+                {pedido.map( foods =>(       
                 <ul>
-                    <li id={foods.id}>{foods.name}<span> R$</span>{foods.price}<MdAddCircle size={28} id="add"/></li>
+                    <li id={foods.id}>{foods.name}<span> R$</span>{foods.price}<MdAddCircle size={28} id="add"
+                        onClick={()=>{
+                            adicionar_item_comanda(foods)
+                        }}
+                    /></li>
                 </ul>
                 ))}              
             </div>
             <div className="view-comanda">
                 <MdRestaurantMenu size={100}/>
                     <div className="price-comanda">
-                    <input type="text" placeholder="Nome do Cliente"/>
+                    <input type="text" placeholder="Nome do Cliente" id="name_client"/>
                         <ul>
-                            <li><span>3 qtd </span>Duplo Cheedar<span> R$</span>29,00 <MdRemoveCircle size={28} id="rm"/></li>
-                            <li><span>3 qtd </span>Duplo Cheedar<span> R$</span>29,00 <MdRemoveCircle size={28} id="rm"/></li>
-                            <li><span>3 qtd </span>Duplo Cheedar<span> R$</span>29,00 <MdRemoveCircle size={28} id="rm"/></li>
-                            <li><span>3 qtd </span>Duplo Cheedar<span> R$</span>29,00 <MdRemoveCircle size={28} id="rm"/></li>
+                        {itens.map(i=>( 
+                                <li key={i.id}><span>3 qtd </span> {i.name} <span> R$</span> {i.price} <MdRemoveCircle size={28} id="rm"/></li>
+                            ))}
                         </ul>
+
                     </div>
                     <div className="price"><span>TOTAL: </span> R$200,00</div>
-                <button className="btn-price">Adicionar</button>
+                <button type="button" className="btn-price" onClick={()=>registrar_Comanda(pedido)}>Adicionar</button>
             </div>
         </div>
     );
