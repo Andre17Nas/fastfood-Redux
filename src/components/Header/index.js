@@ -7,7 +7,7 @@ export default function Header(){
     return(
         <div className="header-container">
             <Link to="/">
-                <span> <MdFiberNew size={20}/> Adicionar uma Nova Comanda</span>
+                <span> <MdFiberNew size={20}/>voltar</span>
                 </Link>
 
                 <Link to="/cozinha">

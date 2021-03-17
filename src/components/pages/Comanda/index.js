@@ -1,9 +1,10 @@
-import React, { useState, useEffect} from  'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import './comanda.css'
-import { MdFormatListBulleted, MdAddCircle, MdRemoveCircle, MdRestaurantMenu } from  'react-icons/md'
-import api from '../../../services/api'
+import React, { useState, useEffect} from  'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import './comanda.css';
+import { addComanda, remComanda, updateComanda } from '../../../store/modules/comandas/actions';
+import { MdFormatListBulleted, MdAddCircle, MdRemoveCircle, MdRestaurantMenu, MdDelete } from  'react-icons/md';
+import api from '../../../services/api';
 
 export default function Comanda(){
 
@@ -54,11 +55,19 @@ export default function Comanda(){
        // console.log(comanda)
     }
 
+    /* functions para controlar itens da Comanda */
     function adicionar_item_comanda(item){
-        dispatch({
-            type: "ADD_ITEM_COMANDA",
-            item
-        })
+        dispatch(addComanda(item))
+    }
+
+    function remover_item_comanda(id){
+        dispatch(remComanda(id))
+    }
+
+    /* functions */
+
+    function decrementQtd(item){
+        dispatch(updateComanda(item.name, item.qtd - 1))
     }
 
     return(
@@ -99,11 +108,15 @@ export default function Comanda(){
                 <MdRestaurantMenu size={100}/>
                     <div className="price-comanda">
                     <input type="text" placeholder="Nome do Cliente" id="name_client"/>
-                        <ul>
-                        {itens.map(i=>( 
-                                <li key={i.id}><span>3 qtd </span> {i.name} <span> R$</span> {i.price} <MdRemoveCircle size={28} id="rm"/></li>
-                            ))}
-                        </ul>
+                        
+                        {itens.map(i =>( 
+                            <ul>
+                                <li key={i.id}><span>{i.qtd} qtd </span> {i.name} <span> R$</span> {i.price} 
+                                <MdRemoveCircle size={28} id="rm" onClick={()=> decrementQtd(i)}/>
+                                <MdDelete size={28} id="rm" onClick={()=> remover_item_comanda(i.id)}/></li>
+                            </ul>
+                        ))}
+                        
 
                     </div>
                     <div className="price"><span>TOTAL: </span> R$200,00</div>
