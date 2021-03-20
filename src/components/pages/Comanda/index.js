@@ -10,22 +10,12 @@ export default function Comanda(){
 
     
     const itens = useSelector(state => state.reducer);
-    console.log(itens)
-    /* 
-    
-    # state para comanda 
-    
-    - Nome do cliente v
-    - Mesa v
-    - pedidos v
-    - Preço  
-    
-    */
-   // const [comanda, setComanda] = useState([]); /* dados da comanda */
+    const total_comanda = useSelector(state => state.reducer)
+    console.log("um array: ", total_comanda)
+
+
    // const [cliente, setCliente] = useState(''); /* nome do cliente */
-    const [mesa, setMesa] = useState(''); /* nome da mesa */
-  //  const [itempedido, setItempedido] = useState([]); /* armazena os items */
-  //  const [price, setPrice] = useState(0.00); /* total da comanda */
+    const [mesa, setMesa] = useState('');
 
     const [category, setCategory] = useState('burgers'); /* categora usado para escolher os pratos*/
     const [pedido, setPedido] = useState([]); /* recebe os dados da api*/
@@ -119,7 +109,10 @@ export default function Comanda(){
                         
 
                     </div>
-                    <div className="price"><span>TOTAL: </span> R$200,00</div>
+                    <div className="price"><span>TOTAL: </span> R$ { itens.reduce((a, b) => a + b.qtd * b.price, 0.00) }
+                    
+                    
+                    </div>
                 <button type="button" className="btn-price" onClick={()=>registrar_Comanda(pedido)}>Adicionar</button>
             </div>
         </div>
