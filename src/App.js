@@ -10,7 +10,6 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header/>
         <Routes/>
       </BrowserRouter>
     </Provider>
