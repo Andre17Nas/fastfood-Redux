@@ -1,102 +1,90 @@
-.container{
-    margin: 0 auto;
-    height: 100vh;
-    background-color: #FFF;
-    border: 2px solid #c4c4c4;
-    border-radius: 30px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    align-items: center;
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-cozinha{   
+    display: grid;
+    grid-template-columns: 0.5fr 2fr;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.content > h1{
+    margin-left:20px;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-weight: 300;
+    border-bottom: 3px solid #FFA51F;
+    width: 300px;
+}
+
+.queue {
+    margin: 0 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-
-    font-family: Roboto thin;
-    font-size: 0.7rem;
-    padding: 10px;
+    width: 75vw;
+    height: 100vh;
 }
 
-.fila-comandas{
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    height: 100%;
-
-}
-
-.fila-comandas #father #title{
-    display: flex;
-}
-.fila-comandas #father div h1{ /* titulo */
-    
-    width: 90%;
-    height: 14%;
-    border-bottom: 2px solid #c4c4c4;
-}
-
-.cozinha-comandas{ /* section */
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
-    height: 100%;
-}
-
-.pagar-comandas{ /* section */
-    grid-column-start: 3;
-    grid-row-start: 1;
-    grid-row-end: 4;
-    height: 100%;
-}
-
-#list-comanda{
-    font-family: Roboto;
-    font-size: 1rem;
-    height: auto; 
-}
-
-.simply-comanda{
-    margin: 10px;
-    border: none;
-    box-shadow: none;
-    display: inline-flex;
-    height: auto;
+.card-comanda {
+    margin: 0;
     background-color: #FFF;
+    width: 300px;
+    height: 150px;
     border-radius: 20px;
-    padding: 20px;
-    border: 1px solid #CDCDCD;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.20);
+    border: 1px solid #bbbb;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto;  
+    color: #646464;
+
 }
 
-.simply-comanda:hover{
-    background-color: #c4c4c4;
+.card-comanda > h1{
+}
+
+.card-comanda > p{
+    display: none;
+}
+
+.card-comanda #done{
+    display: none;
+    color: #94D58F;
+    float: right;
+}
+
+.card-comanda #done:hover{
+    color: #69A664;
+    transform: scale(1.2);
+    transition-duration: 0.2s;
+}
+
+.card-comanda:hover{
+    transform: scale(1.2);
+    transition: ease-in-out;
+    transition-duration: 0.2s;
     cursor: pointer;
+
+    
+    padding: 10px;
+    font-size: 0.7rem;
+    text-align: left;
+
 }
 
-#title-side{
-    display: flex;
-    border-bottom: 2px solid #c4c4c4;
+.card-comanda:hover p{
+    display: block;
 }
 
-#title-rest{
-    display: flex;
-    border-bottom: 2px solid #c4c4c4; 
-}
-
-#icon-fila{
-    color: #FFA149;
-    margin: 0 10px;
-    transform: translateY(13px);
-}
-
-#icon-rest{
-    color: #3CCFB5;
-    margin: 0 10px;
-    transform: translateY(10px);
-}
-
-#icon-pagar{
-    color: #1E943F;
-    margin: 0 10px;
-    transform: translateY(12px);
+.card-comanda:hover #done{
+    display: block;
 }

@@ -40,6 +40,11 @@ export default function reducer(state=[], action){
                 }
             })
         }  
+        case 'ADD_COMANDA_TO_QUEUE':
+            console.log("queue: ", action)
+            return [action]
+        case 'QUEUE_COZINHA':
+            return [...state, action]
         default:
             return state /* */
 

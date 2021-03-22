@@ -1,19 +1,17 @@
 import React, { useState, useEffect} from  'react';
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import './comanda.css';
 import { addComanda, remComanda, updateComanda } from '../../../store/modules/comandas/actions';
-import { MdFormatListBulleted, MdAddCircle, MdRemoveCircle, MdDelete } from  'react-icons/md';
-import { MdDashboard, MdHistory, MdRestaurant, MdAttachMoney, MdWhatshot } from 'react-icons/md'
-import { FaAlignLeft } from 'react-icons/fa'
+import { MdAddCircle, MdRemoveCircle, MdDelete } from  'react-icons/md';
 import api from '../../../services/api';
+import Sidebar from '../../Sidebar'
 
 export default function Comanda(){
 
     
     const itens = useSelector(state => state.reducer);
-    const total_comanda = useSelector(state => state.reducer)
-    console.log("um array: ", total_comanda)
 
 
    // const [cliente, setCliente] = useState(''); /* nome do cliente */
@@ -36,17 +34,6 @@ export default function Comanda(){
 
     },[category])
 
-    function registrar_Comanda(nova_comanda){
-        //setCliente(document.getElementById('name_client').value)
-        //setComanda(...comanda, cliente, mesa)
-        dispatch({
-            type: "FILA_COMANDAS", /* envia para o Reducer */
-            /* preciso enviar a comanda com todos os dados */
-            nova_comanda 
-        })
-       // console.log(comanda)
-    }
-
     /* functions para controlar itens da Comanda */
     function adicionar_item_comanda(item){
         dispatch(addComanda(item))
@@ -62,22 +49,25 @@ export default function Comanda(){
         dispatch(updateComanda(item.name, item.qtd - 1))
     }
 
+    function addComanda_to_queue(mesa, itens, client, total){
+        dispatch({
+            type: "ADD_COMANDA_TO_QUEUE",
+            mesa,
+            itens,
+            client,
+            total
+
+        })
+    }
+
     return(
         <>
         <div className="container">
-        <div className="sidebar">
-            <ul>
-                <li id="li"><MdRestaurant size={26} id="sidebar-ico"/> NOVA COMANDA</li>
-                <li id="li"><FaAlignLeft size={26} id="sidebar-ico"/> COMANDAS</li>
-                <li id="li"><MdWhatshot size={26} id="sidebar-ico"/> COZINHA</li>
-                <li id="li"><MdAttachMoney size={26} id="sidebar-ico"/> PAGAMENTOS</li>
-                <li id="li"><MdHistory size={26} id="sidebar-ico"/> HISTORICO</li>
-                <li id="li"><MdDashboard size={26} id="sidebar-ico"/> DASHBOARD</li>
-            </ul>
-        </div>
+        <Sidebar/>
             <div className="new-comanda">
                 <h1>nova comanda</h1>          
                     <select className="list-container" id="num_mesa" onChange={()=>setMesa(document.getElementById('num_mesa').value)}>
+                            <option value="selecione uma mesa" defaultChecked="true">selecione uma mesa</option>
                             <option value="Mesa 01">Mesa 01</option>
                             <option value="Mesa 02">Mesa 02</option>
                             <option value="Mesa 03">Mesa 03</option>
@@ -114,7 +104,7 @@ export default function Comanda(){
             </div>
             <div className="view-comanda">           
                 <div className="view-content">
-                <input type="text" placeholder="Nome do Cliente"/>
+                <input type="text" placeholder="Nome do Cliente" id="client"/>
                    <div className="container-table-comanda">
                     <table id="list-menu">
                     {itens.map(i =>( 
@@ -130,8 +120,17 @@ export default function Comanda(){
                     
                    </div>    
                 </div> 
-                <div className="price"><span id="span-total">TOTAL: </span> R$: { parseFloat(itens.reduce((a, b) => a + b.qtd * b.price, 0.00)).toFixed(2)}</div>
-                <button type="button" className="btn-price" onClick={()=>registrar_Comanda(pedido)}>Adicionar</button>                
+                <div className="price"><span id="span-total">total: </span>
+                R$ { 
+                    parseFloat(itens.reduce((a, b) => a + b.qtd * b.price, 0.00)).toFixed(2)
+                    
+                    }</div>
+                <Link to="/fila-comandas">
+                <button type="button" className="btn-price" onClick={()=>addComanda_to_queue(
+                    mesa, itens, document.getElementById('client').value,
+                    parseFloat(itens.reduce((a, b) => a + b.qtd * b.price, 0.00)).toFixed(2)
+                )}>Adicionar</button> 
+                </Link>               
             </div> 
                  
         </div>
