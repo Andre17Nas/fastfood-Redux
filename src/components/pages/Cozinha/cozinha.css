@@ -14,13 +14,23 @@ body {
     flex-direction: column;
 }
 
-
-.content > h1{
+/* title: Na cozinha */
+.content-cook > h1{
     margin-left:20px;
     font-family: Roboto;
     font-size: 1.5rem;
     font-weight: 300;
     border-bottom: 3px solid #FFA51F;
+    width: 300px;
+}
+
+/* title: Na fila ... */
+.content-queue > h1{
+    margin-left:20px;
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-weight: 300;
+    border-bottom: 3px solid #94D58F;
     width: 300px;
 }
 
@@ -50,6 +60,7 @@ body {
 }
 
 .card-comanda > h1{
+    border-bottom: 3px solid #94D58F;
 }
 
 .card-comanda > p{
@@ -62,8 +73,21 @@ body {
     float: right;
 }
 
+.card-comanda #cook{
+    display: none;
+    color: #FFA51F;
+    float: right;
+}
+
+/* ----------------- */
 .card-comanda #done:hover{
     color: #69A664;
+    transform: scale(1.2);
+    transition-duration: 0.2s;
+}
+
+.card-comanda #cook:hover{
+    color: #FFA51F;
     transform: scale(1.2);
     transition-duration: 0.2s;
 }
@@ -86,5 +110,9 @@ body {
 }
 
 .card-comanda:hover #done{
+    display: block;
+}
+
+.card-comanda:hover #cook{
     display: block;
 }

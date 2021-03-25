@@ -39,12 +39,7 @@ export default function reducer(state=[], action){
                     draft[itemIndex].qtd = Number(action.qtd)
                 }
             })
-        }  
-        case 'ADD_COMANDA_TO_QUEUE':
-            console.log("queue: ", action)
-            return [action]
-        case 'QUEUE_COZINHA':
-            return [...state, action]
+        } 
         default:
             return state /* */
 

@@ -58,10 +58,10 @@ export default function Comanda(){
             total
 
         })
+        
     }
 
     return(
-        <>
         <div className="container">
         <Sidebar/>
             <div className="new-comanda">
@@ -125,16 +125,13 @@ export default function Comanda(){
                     parseFloat(itens.reduce((a, b) => a + b.qtd * b.price, 0.00)).toFixed(2)
                     
                     }</div>
-                <Link to="/fila-comandas">
+                
                 <button type="button" className="btn-price" onClick={()=>addComanda_to_queue(
                     mesa, itens, document.getElementById('client').value,
                     parseFloat(itens.reduce((a, b) => a + b.qtd * b.price, 0.00)).toFixed(2)
-                )}>Adicionar</button> 
-                </Link>               
-            </div> 
-                 
+                )}>Adicionar</button>             
+            </div>                 
         </div>
-    </>
     );
 }
 

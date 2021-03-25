@@ -1,27 +1,42 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import Sidebar from '../../Sidebar'
-import { MdCheckCircle } from 'react-icons/md'
+import { MdCheckCircle, MdWhatshot } from 'react-icons/md'
 import { useSelector, useDispatch } from 'react-redux'
 
 export default function Queue(){
 
-    const comanda = useSelector(state => state.reducer);
-    console.log("buscando: ", comanda)
+    const comanda = useSelector(state => state.queue_cozinha);
 
     const dispatch = useDispatch();
 
-    function addCozinha(comanda){
+    //deletar item
+    function removeQueue(mesa){
         dispatch({
             type: "QUEUE_COZINHA",
-            comanda
+            mesa
         })
+        
+        
     }
+
+    function cooking(client, itens, mesa, total){
+        dispatch({
+            type: "COOKING",
+            client,
+            itens,
+            mesa,
+            total
+        })
+
+        removeQueue(mesa)
+    }
+
 
     return(
         <div className="container-cozinha">
         <Sidebar/>
-            <div className="content">
+            <div className="content-queue">
                 <h1>status: Na fila . . .</h1>
                 <div className="queue">
                     {comanda.map(c => (
@@ -31,7 +46,7 @@ export default function Queue(){
                                 <p>{c.itens.map(i =>(
                                     <p>{i.name}</p> 
                                     ))}</p>
-                                <MdCheckCircle size={24} id="done"/>
+                                    <MdWhatshot size={30} id="cook" onClick={()=>{ cooking(c.client, c.itens, c.mesa, c.total)}} label="Adicionar na cozinha"/>
                             </div>
                     ))}
                 </div>
