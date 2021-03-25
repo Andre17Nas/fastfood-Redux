@@ -10,9 +10,9 @@ import Sidebar from '../../Sidebar'
 
 export default function Comanda(){
 
-    
+    /* usado para buscar os dados no redux */
     const itens = useSelector(state => state.reducer);
-
+    
 
    // const [cliente, setCliente] = useState(''); /* nome do cliente */
     const [mesa, setMesa] = useState('');
@@ -50,16 +50,70 @@ export default function Comanda(){
     }
 
     function addComanda_to_queue(mesa, itens, client, total){
-        dispatch({
-            type: "ADD_COMANDA_TO_QUEUE",
-            mesa,
-            itens,
-            client,
-            total
+        try{
+            if(mesa === '-' || client === '' || total === '0.00'){
+                alert('preencha todos os dados')
+            }else{
+                dispatch({
+                    type: "ADD_COMANDA_TO_QUEUE",
+                    mesa,
+                    itens,
+                    client,
+                    total
+        
+                }) 
 
+                document.getElementById('client').value = ''
+                
+            }   
+        }catch(e){
+            alert(e)
+        }
+        
+    }
+
+    /* usado para verificar se existe comandas nas listas(queue, cozinha) */
+    const verify_on_queue = useSelector(state => state.queue_cozinha);
+    const verify_on_cook = useSelector(state => state.cooking);
+
+    let mesas_ocupadas = []
+
+    function validation(verify_on_queue, verify_on_cook){
+
+        //step 1: criar o array com todas as mesas ocupas
+        verify_on_queue.forEach((queue) => {
+            
+            mesas_ocupadas.push(queue.mesa)
+        });
+
+        verify_on_cook.forEach((cook) => {
+            
+            mesas_ocupadas.push(cook.mesa)
+        });
+
+        //console.log("encontrada no array?", mesas_ocupadas)
+
+        //step 2: pegar o valor que esta no options e comparar com os valores do array
+        //var mesa_disponivel = document.getElementById('num_mesa')
+        let mesa_disponivel = document.querySelectorAll('#option_mesa')
+        
+        
+        console.log("mesa doom option:", mesa_disponivel)
+
+        mesa_disponivel.forEach(d => {
+            mesas_ocupadas.forEach(i =>{
+                if(d.textContent === i){
+                    
+                    //console.log("a mesa: ", d.textContent , "esta indisponivel")
+                    d.innerHTML = "-"
+                    d.setAttribute('disable', 'true')
+                }
+            })
         })
         
     }
+
+    validation(verify_on_queue, verify_on_cook)
 
     return(
         <div className="container">
@@ -68,15 +122,15 @@ export default function Comanda(){
                 <h1>nova comanda</h1>          
                     <select className="list-container" id="num_mesa" onChange={()=>setMesa(document.getElementById('num_mesa').value)}>
                             <option value="selecione uma mesa" defaultChecked="true">selecione uma mesa</option>
-                            <option value="Mesa 01">Mesa 01</option>
-                            <option value="Mesa 02">Mesa 02</option>
-                            <option value="Mesa 03">Mesa 03</option>
-                            <option value="Mesa 04">Mesa 04</option>
-                            <option value="Mesa 05">Mesa 05</option>
-                            <option value="Mesa 06">Mesa 06</option>
-                            <option value="Mesa 07">Mesa 07</option>
-                            <option value="Mesa 08">Mesa 08</option>
-                            <option value="Mesa 09">Mesa 09</option>
+                            <option value="Mesa 01" id="option_mesa">Mesa 01</option>
+                            <option value="Mesa 02" id="option_mesa">Mesa 02</option>
+                            <option value="Mesa 03" id="option_mesa">Mesa 03</option>
+                            <option value="Mesa 04" id="option_mesa">Mesa 04</option>
+                            <option value="Mesa 05" id="option_mesa">Mesa 05</option>
+                            <option value="Mesa 06" id="option_mesa">Mesa 06</option>
+                            <option value="Mesa 07" id="option_mesa">Mesa 07</option>
+                            <option value="Mesa 08" id="option_mesa">Mesa 08</option>
+                            <option value="Mesa 09" id="option_mesa">Mesa 09</option>
                         </select>
                     <select className="list-container" id="select" onChange={
                         ()=>{setCategory(document.getElementById("select").value)}}>

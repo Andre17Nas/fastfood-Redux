@@ -4,7 +4,7 @@ export default function queue_cozinha(state=[], action){
 
     switch(action.type){
         case "ADD_COMANDA_TO_QUEUE": /* adiciona a comanda na fila de espera */
-        console.log("add", action)
+        //console.log("add", action)
         return [...state, action]
 
         case "QUEUE_COZINHA": /* remove a comanda da fila de espera */

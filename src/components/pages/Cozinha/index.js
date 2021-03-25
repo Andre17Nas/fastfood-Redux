@@ -9,6 +9,13 @@ export default function Cozinha(){
     const comanda = useSelector(state => state.cooking);
     const dispatch = useDispatch();
 
+    function comanda_pronta(mesa){
+        dispatch({
+            type: "PRATO_PRONTO",
+            mesa
+        })
+    }
+
     return(
         <div className="container-cozinha">
         <Sidebar/>
@@ -22,7 +29,7 @@ export default function Cozinha(){
                                 <p>{c.itens.map(i =>(
                                 <span>{i.name}, </span>
                                 ))}</p>    
-                                <MdCheckCircle size={24} id="done"/>
+                                <MdCheckCircle size={24} id="done" onClick={()=>comanda_pronta(c.mesa)}/>
                             </div>
                         ))
                         }
