@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from  'react';
-import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import './comanda.css';
@@ -7,6 +7,10 @@ import { addComanda, remComanda, updateComanda } from '../../../store/modules/co
 import { MdAddCircle, MdRemoveCircle, MdDelete } from  'react-icons/md';
 import api from '../../../services/api';
 import Sidebar from '../../Sidebar'
+import 'react-toastify/dist/ReactToastify.css'
+
+
+toast.configure()
 
 export default function Comanda(){
 
@@ -51,17 +55,27 @@ export default function Comanda(){
 
     function addComanda_to_queue(mesa, itens, client, total){
         try{
-            if(mesa === '-' || client === '' || total === '0.00'){
-                alert('preencha todos os dados')
-            }else{
+            if(mesa === "-" || mesa === ''){
+                document.getElementById('num_mesa').style.borderColor = "#F95C5C"
+                toast.error('Escolha uma mesa disponivel!')
+            }else if(client === ''){
+                document.getElementById('client').style.borderColor = "#F95C5C"
+                toast.error('O Nome do cliente está vazio!')
+            }else if(total === '0.00'){
+                document.getElementById('table-menu').style.borderColor = "#F95C5C"
+                toast.error('Adicione pratos a comanda!')
+            }
+            else{
                 dispatch({
                     type: "ADD_COMANDA_TO_QUEUE",
                     mesa,
                     itens,
                     client,
                     total
-        
+                    
                 }) 
+                
+                toast.success('Comanda criada com Sucesso!')
 
                 document.getElementById('client').value = ''
                 
@@ -121,7 +135,7 @@ export default function Comanda(){
             <div className="new-comanda">
                 <h1>nova comanda</h1>          
                     <select className="list-container" id="num_mesa" onChange={()=>setMesa(document.getElementById('num_mesa').value)}>
-                            <option value="selecione uma mesa" defaultChecked="true">selecione uma mesa</option>
+                            <option value="selecione uma mesa" defaultChecked="true" id="option_mesa">selecione uma mesa</option>
                             <option value="Mesa 01" id="option_mesa">Mesa 01</option>
                             <option value="Mesa 02" id="option_mesa">Mesa 02</option>
                             <option value="Mesa 03" id="option_mesa">Mesa 03</option>

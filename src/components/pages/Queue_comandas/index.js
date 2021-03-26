@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import Sidebar from '../../Sidebar'
 import { MdCheckCircle, MdWhatshot } from 'react-icons/md'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Queue(){
 
@@ -16,8 +18,6 @@ export default function Queue(){
             type: "QUEUE_COZINHA",
             mesa
         })
-        
-        
     }
 
     function cooking(client, itens, mesa, total){
@@ -28,7 +28,7 @@ export default function Queue(){
             mesa,
             total
         })
-
+        toast.info('prato sendo preparado!')
         removeQueue(mesa)
     }
 

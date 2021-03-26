@@ -8,14 +8,12 @@ import Header from './components/Header'
 
 function App() {
   return (
-    <>
-        <Header/>
         <Provider store={store}>
-        <BrowserRouter>
-          <Routes/>
-        </BrowserRouter>
+        <Header/>
+          <BrowserRouter>
+            <Routes/>
+          </BrowserRouter>
       </Provider>
-    </>
   );
 }
 

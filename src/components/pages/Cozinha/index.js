@@ -3,18 +3,24 @@ import { useSelector, useDispatch } from 'react-redux'
 import Sidebar from "../../Sidebar"
 import './cozinha.css'
 import { MdCheckCircle } from 'react-icons/md'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Cozinha(){
 
     const comanda = useSelector(state => state.cooking);
     const dispatch = useDispatch();
 
+
     function comanda_pronta(mesa){
         dispatch({
             type: "PRATO_PRONTO",
             mesa
         })
+        toast.success('Comanda pronta para entrega!')
     }
+
+
 
     return(
         <div className="container-cozinha">
