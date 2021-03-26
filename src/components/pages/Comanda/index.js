@@ -55,7 +55,10 @@ export default function Comanda(){
 
     function addComanda_to_queue(mesa, itens, client, total){
         try{
-            if(mesa === "-" || mesa === ''){
+            if(mesa === ''){
+                document.getElementById('num_mesa').style.borderColor = "#F95C5C"
+                toast.error('Escolha uma mesa disponivel!')
+            }else if(mesa === '-'){
                 document.getElementById('num_mesa').style.borderColor = "#F95C5C"
                 toast.error('Escolha uma mesa disponivel!')
             }else if(client === ''){
